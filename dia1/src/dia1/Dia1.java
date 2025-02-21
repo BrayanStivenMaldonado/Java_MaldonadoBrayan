@@ -4,7 +4,40 @@ package dia1;
 import java.util.*;
 
 
+
+
 public class Dia1 {
+    
+    public static String obtenerComplementoA1(String binario) {
+        StringBuilder complemento = new StringBuilder();
+        for (char bit : binario.toCharArray()) {
+            complemento.append(bit == '0' ? '1' : '0');
+        }
+        return complemento.toString();
+    }
+    
+    public static String obtenerComplementoA2(String binario) {
+        StringBuilder complemento = new StringBuilder();
+        for (char bit : binario.toCharArray()) {
+            complemento.append(bit == '0' ? '1' : '0');
+        }
+        StringBuilder resultado = new StringBuilder(complemento.toString());
+        int carry = 1;
+        for (int i = resultado.length() - 1; i >= 0; i--) {
+            if (resultado.charAt(i) == '1' && carry == 1) {
+                resultado.setCharAt(i, '0');
+            } else if (carry == 1) {
+                resultado.setCharAt(i, '1');
+                carry = 0;
+                break;
+            }
+        }
+         if (carry == 1) {
+            resultado.insert(0, '1');
+        }
+        return resultado.toString();
+    }
+    
     private static final Scanner scan = new Scanner(System.in);
     
     public static void main(String[] args) {
@@ -140,14 +173,14 @@ public class Dia1 {
                 
             case 13: 
                 System.out.println("encontrar el factorial de cualquier número.");
-                System.out.println("Ingrese el numero del que desea calcular su vectorial.");
+                System.out.println("Ingrese el numero del que desea calcular su factorial.");
                 int h = scan.nextInt();
                 
-                int vectorial = 1;
+                int factorial = 1;
                 for(int i=h; i>0; i--){
-                    vectorial = vectorial*i;
+                    factorial = factorial*i;
                 }
-                System.out.println(vectorial);
+                System.out.println(factorial);
                 break;
                 
             case 14:
@@ -211,6 +244,17 @@ public class Dia1 {
                 
             case 18:
                 System.out.println("calcular el MCD (Máximo Común Divisor) de dos números dados.");
+                System.out.println("Ingrese los dos números");
+                int aa = scan.nextInt();
+                int bb = scan.nextInt();
+                
+                while(bb!=0){
+                    int temp=bb;
+                    bb=aa%bb;
+                    aa=temp;
+                }
+                System.out.println("el MCD es: "+aa);
+                break;
                 
             case 19:
                 System.out.println("ingresar números hasta que el usuario lo desee y, al final, muestre la cantidad de números positivos, negativos y ceros ingresados.");
@@ -304,72 +348,275 @@ public class Dia1 {
                 
             case 23:
                 System.out.println("verificar si un número es un Número Fuerte o no.");
+                scan.nextLine();
+                String fort = scan.nextLine();
+                
+                
+                int ver = 0;
+                for(int i=0; i<fort.length(); i++){
+                    int fo = fort.charAt(i)-'0';
+                      
+                    int sumFact = 1;
+                    for(int x=fo; x>0; x--){
+                        sumFact = sumFact*x;
+                    }
+                    ver+=sumFact;
+                }
+                
+                if(ver == Integer.parseInt(fort)){
+                    System.out.println(fort+" es un número fuerte");
+                }else{
+                    System.out.println(fort+" no es un número fuerte");
+                }
+                break;
+                
                 
             case 24:
                 System.out.println("convertir un número hexadecimal a decimal.");
+                System.out.print("Ingrese un número hexadecimal: ");
+                    String hex = scan.nextLine();
+                    System.out.println("Decimal: " + Integer.parseInt(hex, 16));
+                    break;
                 
             case 25:
                 System.out.println("convertir un número hexadecimal a octal.");
+                System.out.print("Ingrese un número hexadecimal: ");
+                    hex = scan.nextLine();
+                    System.out.println("Octal: " + Integer.toOctalString(Integer.parseInt(hex, 16)));
+                    break;
                 
             case 26:
                 System.out.println("convertir un número hexadecimal a binario.");
+                System.out.print("Ingrese un número hexadecimal: ");
+                    hex = scan.nextLine();
+                    System.out.println("Binario: " + Integer.toBinaryString(Integer.parseInt(hex, 16)));
+                    break;
                 
             case 27:
                 System.out.println("convertir un número decimal a hexadecimal.");
+                System.out.println("Ingrese el número decimal: ");
+                int decimalToH = scan.nextInt();
+                String hexa = Integer.toHexString(decimalToH).toUpperCase();
+                System.out.println("El número es: "+hexa);
                 
             case 28:
                 System.out.println("convertir un número decimal a octal.");
+                System.out.println("Ingrese el número decimal: ");
+                int decimalToO = scan.nextInt();
+                String octal = Integer.toOctalString(decimalToO);
+                System.out.println("El número octal es: "+octal);
                 
             case 29:
                 System.out.println("convertir un número decimal a binario.");
+                System.out.print("Ingrese un número decimal: ");
+                    int decimal = scan.nextInt();
+                    System.out.println("Binario: " + Integer.toBinaryString(decimal));
+                    break;
                 
             case 30:
                 System.out.println("convertir un número binario a octal.");
+                System.out.print("Ingrese un número binario: ");
+                    String bin = scan.nextLine();
+                    System.out.println("Octal: " + Integer.toOctalString(Integer.parseInt(bin, 2)));
+                    break;
                 
             case 31:
                 System.out.println("convertir un número binario a decimal.");
+                System.out.print("Ingrese un número binario: ");
+                    bin = scan.nextLine();
+                    System.out.println("Decimal: " + Integer.parseInt(bin, 2));
+                    break;
                 
             case 32:
                 System.out.println("convertir un número binario a hexadecimal.");
+                System.out.print("Ingrese un número binario: ");
+                    bin = scan.nextLine();
+                    System.out.println("Hexadecimal: " + Integer.toHexString(Integer.parseInt(bin, 2)));
+                    break;
                 
             case 33:
                 System.out.println("convertir un número octal a binario.");
+                System.out.print("Ingrese un número octal: ");
+                    String octa = scan.nextLine();
+                    System.out.println("Binario: " + Integer.toBinaryString(Integer.parseInt(octa, 8)));
+                    break;
                 
             case 34:
                 System.out.println("convertir un número octal a binario.");
+                System.out.print("Ingrese un número octal: ");
+                    octa = scan.nextLine();
+                    System.out.println("Decimal: " + Integer.parseInt(octa, 8));
+                    break;
                 
             case 35:
                 System.out.println("convertir un número octal a hexadecimal.");
+                System.out.print("Ingrese un número octal: ");
+                    octa = scan.nextLine();
+                    System.out.println("Hexadecimal: " + Integer.toHexString(Integer.parseInt(octa, 8)));
+                    break;
                 
             case 36:
                 System.out.println("encontrar el complemento a 1 de un número en Java.");
+                System.out.print("Ingrese un número entero: ");
+                int numero = scan.nextInt();
+
+                String binario1 = Integer.toBinaryString(numero);
+                String complemento = obtenerComplementoA1(binario1);
+
+                System.out.println("Número en binario: " + binario1);
+                System.out.println("Complemento a 1: " + complemento);
                 
             case 37:
                 System.out.println("encontrar el complemento a 2 de un número binario en Java.");
+                    System.out.print("Ingrese un número binario: ");
+                    String binario2 = scan.nextLine();
+
+                    String complementoA2 = obtenerComplementoA2(binario2);
+                    System.out.println("El complemento a 2 es: " + complementoA2);
+                    break;
                 
             case 38:
                 System.out.println("imprimir la serie de Fibonacci hasta n términos.");
+                int fibona = scan.nextInt();
+                int aFibo = 0, bFibo = 1;
+                
+                for(int i=0; i<fibona;i++){
+                    System.out.println(aFibo+"");
+                    int t = aFibo;
+                    aFibo = bFibo;
+                    bFibo = bFibo+ t;
+                }
                 
             case 39:
                 System.out.println("verificar si un número es un Número Fuerte o no.");
+                System.out.println("Ingrese el número que desea revisar si es fuerte");
+                scan.nextLine();
+                String fort1 = scan.nextLine();
+                
+                
+                int ver1 = 0;
+                for(int i=0; i<fort1.length(); i++){
+                    int fo1 = fort1.charAt(i)-'0';
+                      
+                    int sumFact1 = 1;
+                    for(int x=fo1; x>0; x--){
+                        sumFact1 = sumFact1*x;
+                    }
+                    ver1+=sumFact1;
+                }
+                
+                if(ver1 == Integer.parseInt(fort1)){
+                    System.out.println(fort1+" es un número fuerte");
+                }else{
+                    System.out.println(fort1+" no es un número fuerte");
+                }
+                break;
                 
             case 40:
                 System.out.println("imprimir todos los Números Fuertes del 1 al 100000.");
                 
+                for(int i=1; i<100000; i++){
+                    int pruebaFuerte = 0;
+                    String probar = Integer.toString(i);
+                    for(int y=0; y<probar.length(); y++){
+                        int prob = probar.charAt(y)-'0';
+                        
+                        int sumFa = 1;
+                        for(int x=prob; x>0; x--){
+                            sumFa = sumFa*x;
+                        }
+                        pruebaFuerte += sumFa;
+                        if(pruebaFuerte == Integer.parseInt(probar)){
+                            System.out.println(probar);
+                        }
+                    }
+                }
+                break;
+                
             case 41:
                 System.out.println("imprimir todos los Números Perfectos del 1 al 10000.");
                 
+                for(int i=1; i<100000; i++){
+                    int verificacion = 0;
+                    for(int x=1; x<10000; x++){
+                        if(i%x==0 && i!=x){
+                            verificacion += x;
+                        }
+                    }
+                    if(verificacion == i){
+                        System.out.println(i);
+                    }
+                }
+                break;
+                
             case 42:
-                System.out.println("verificar si un número es un Número Perfecto o no.");
+                System.out.println("verificar si un número es un Número Perfecto o no."); 
+                System.out.println("Ingrese el número que desea comprobar que sea perfecto");
+                int perfecto = scan.nextInt();
+                
+                int verif = 0;
+                for(int i=1; i<10000; i++){
+                    if(perfecto%i==0 && i!= perfecto){
+                        verif+=i;
+                    }
+                }
+                
+                if(perfecto == verif){
+                    System.out.println(perfecto+" es un número perfecto");
+                }else{
+                    System.out.println(perfecto+" no es un número perfecto");
+                }
+                break;
                 
             case 43:
                 System.out.println("imprimir todos los Números de Armstrong entre 1 y 1000.");
+                for(int p=1; p<1000; p++){
+                    String toStr = Integer.toString(p);
+                    int contArms = toStr.length();
+                    int toArms = 0;
+                    
+                    for(int i=0; i<contArms; i++){
+                        int foArms = toStr.charAt(i)-'0';
+                        int toFoArms =(int) Math.pow(foArms, contArms);
+                        toArms += toFoArms;
+                    }
+                    if(toArms == Integer.parseInt(toStr)){
+                        System.out.println(toStr);
+                    }
+                }
+                break;
             
             case 44:
                 System.out.println("verificar si un número es un Número de Armstrong o no.");
+                System.out.println("Ingrese el numero que desea comprobar si es de Armstrong: ");
+                scan.nextLine();
+                String Arm = scan.nextLine();
+                int contArm = Arm.length();
+                
+                int toArm = 0;
+                for(int i=0; i<contArm; i++){
+                    int foArm = Arm.charAt(i)-'0';
+                    int toFoArm = (int) Math.pow(foArm, contArm);
+                    toArm += toFoArm;
+                }       
+                if(toArm == Integer.parseInt(Arm)){
+                    System.out.println(Arm+" es un número de Armstrong");
+                }else{
+                    System.out.println(Arm+" no es un número de Armstrong");
+                }
+                break;
                 
             case 45:
                 System.out.println("imprimir los factores primos en Java.");
+                System.out.println("n: ");
+                int factores = scan.nextInt();
+                ArrayList<Integer> facto = new ArrayList<Integer>();
+                
+                for(int i=1; i<factores; i++){
+                    if(factores%i == 0){
+                        facto.add(i);               
+                    }
+                }
         }
     }
 }
