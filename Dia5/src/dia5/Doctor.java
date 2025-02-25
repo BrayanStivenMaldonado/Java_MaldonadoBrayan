@@ -22,3 +22,4 @@ public class Doctor extends Empleados{
     }  
 
 }
+ 
