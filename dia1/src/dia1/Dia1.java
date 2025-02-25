@@ -5,7 +5,7 @@ import java.util.*;
 
 
 
-
+ 
 public class Dia1 {
     
     public static String obtenerComplementoA1(String binario) {
