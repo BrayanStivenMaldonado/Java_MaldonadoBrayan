@@ -1,5 +1,5 @@
 package dia6;
-
+ 
 public class Dia6 {
     // ENCAPSULAMIENTO
     //Se refiere a la restricción del acceso a algunos
