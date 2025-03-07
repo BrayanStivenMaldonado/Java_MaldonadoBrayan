@@ -1,19 +1,23 @@
 package ej2;
 
-public class AuditTransfMonet {
+//En este ejemplo se está incumpliendo el primer pilar de SOLID (SRP)
+//ya que la clase AuditTransfMonet lleva a cabo más de una responsabilidad
+//como realizar la auditoria y enviar el email de notificación 
+//por lo cual se crea una clase separada para que cada una realice una acción por separado.
 
-	public void transferenciaRealizada(Transferencia transferencia) {
+public class AuditTransfMonet {
+    
+    private NotificarTransferencia notificarTransferencia; 
+
+    public AuditTransfMonet(NotificarTransferencia notificarTransferencia) {
+        this.notificarTransferencia = notificarTransferencia;
+    }
+    	public void transferenciaRealizada(Transferencia transferencia) {
         if(this.esTransferenciaImportante(transferencia)) {
             String auditor=this.obtenerDireccionMailAuditor();
             String mensaje=this.componerMensajeAviso(transferencia);
-            ConexionMail conexionMail=null;
-            try {
-                conexionMail = this.abrirConexionMail();
-                conexionMail.enviar(new Mail().to(auditor).withBody(mensaje));
-            } finally {
-            if(conexionMail!=null)
-              conexionMail.cerrar();
-            }
+            
+            notificarTransferencia.EnviarEmail(auditor, mensaje);     
         }
     }
     private boolean esTransferenciaImportante(Transferencia transferencia) {
@@ -24,8 +28,5 @@ public class AuditTransfMonet {
     }
     private String componerMensajeAviso(Transferencia transferencia) {
        return "aviso-transferencia-importante";    
-    }
-    private ConexionMail abrirConexionMail() {
-       return ConexionMail.getInstance();
     }
 }
